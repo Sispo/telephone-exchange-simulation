@@ -1,1 +1,22 @@
 c:\users\sispo\documents\visual studio 2015\Projects\ATC\ATC\bin\Debug\ATC.exe.config
+c:\users\sispo\documents\visual studio 2015\Projects\ATC\ATC\obj\Debug\ATC.csprojResolveAssemblyReference.cache
+c:\users\sispo\documents\visual studio 2015\Projects\ATC\ATC\obj\Debug\ATC.Login.resources
+c:\users\sispo\documents\visual studio 2015\Projects\ATC\ATC\obj\Debug\ATC.UserScreen.resources
+c:\users\sispo\documents\visual studio 2015\Projects\ATC\ATC\obj\Debug\ATC.WelcomeScreen.resources
+c:\users\sispo\documents\visual studio 2015\Projects\ATC\ATC\obj\Debug\ATC.Properties.Resources.resources
+c:\users\sispo\documents\visual studio 2015\Projects\ATC\ATC\obj\Debug\ATC.csproj.GenerateResource.Cache
+c:\users\sispo\documents\visual studio 2015\Projects\ATC\ATC\bin\Debug\ATC.exe
+c:\users\sispo\documents\visual studio 2015\Projects\ATC\ATC\bin\Debug\ATC.pdb
+c:\users\sispo\documents\visual studio 2015\Projects\ATC\ATC\obj\Debug\ATC.exe
+c:\users\sispo\documents\visual studio 2015\Projects\ATC\ATC\obj\Debug\ATC.pdb
+C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\bin\Debug\ATC.exe.config
+C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\obj\Debug\ATC.exe
+C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\obj\Debug\ATC.pdb
+C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\bin\Debug\ATC.exe
+C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\bin\Debug\ATC.pdb
+C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\obj\Debug\ATC.csprojResolveAssemblyReference.cache
+C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\obj\Debug\ATC.Login.resources
+C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\obj\Debug\ATC.UserScreen.resources
+C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\obj\Debug\ATC.WelcomeScreen.resources
+C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\obj\Debug\ATC.Properties.Resources.resources
+C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\obj\Debug\ATC.csproj.GenerateResource.Cache

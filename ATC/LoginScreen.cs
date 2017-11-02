@@ -16,6 +16,40 @@ namespace ATC
         {
             InitializeComponent();
         }
+        private void numberTextBox_Enter(object sender, EventArgs e)
+        {
+            if (numberTextBox.Text == "Enter a number")
+            {
+                numberTextBox.Text = "";
+                numberTextBox.ForeColor = Color.Black;
+            }
+        }
+
+        private void numberTextBox_Leave(object sender, EventArgs e)
+        {
+            if (numberTextBox.Text == "")
+            {
+                numberTextBox.Text = "Enter a number";
+                numberTextBox.ForeColor = Color.DimGray;
+            }
+        }
+        private void passwordTextBox_Enter(object sender, EventArgs e)
+        {
+            if (passwordTextBox.Text == "password")
+            {
+                passwordTextBox.Text = "";
+                passwordTextBox.ForeColor = Color.Black;
+            }
+        }
+
+        private void passwordTextBox_Leave(object sender, EventArgs e)
+        {
+            if (passwordTextBox.Text == "")
+            {
+                passwordTextBox.Text = "password";
+                passwordTextBox.ForeColor = Color.DimGray;
+            }
+        }
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
@@ -27,6 +61,8 @@ namespace ATC
                 screen.user = result.user;
                 screen.user.log += new LogDelegate(screen.log);
                 screen.Show();
+                screen.Text = $"User screen {result.user.id}";
+                this.Close();
             } else
             {
                 MessageBox.Show(result.error);

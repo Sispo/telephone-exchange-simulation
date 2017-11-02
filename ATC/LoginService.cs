@@ -35,19 +35,19 @@ namespace ATC
                     return new LoginResult(false, "Unacceptable id.", null);
                 }
 
-                Dictionary<string, string> db = DatabaseService.Load(atc.name);
+                Dictionary<string, string> db = DatabaseService.Load(atc.id);
 
                 if (db == null)
                 {
                     return LoginService.signUp(atc, id, password);
                 }
 
-                string passwordHash = db[id];
-
-                if (passwordHash == null)
+                if (!db.ContainsKey(id) || db[id] == null)
                 {
                     return LoginService.signUp(atc, id, password);
                 }
+
+                string passwordHash = db[id];
 
                 if (HashService.VerifyMd5Hash(password,passwordHash))
                 {
@@ -59,14 +59,15 @@ namespace ATC
 
 
             }
-            catch
+            catch (Exception err)
             {
+                Console.WriteLine(err.Message);
                 return new LoginResult(false, "Error occured while processing your input. Try again.", null);
             }
         }
         static LoginResult signUp(ATC atc, string id, string password)
         {
-            if (DatabaseService.Save(atc.name, id, HashService.GetMd5Hash(password)))
+            if (DatabaseService.Save(atc.id, id, HashService.GetMd5Hash(password)))
             {
                 return new LoginResult(true, null, connectUser(id, atc));
             }

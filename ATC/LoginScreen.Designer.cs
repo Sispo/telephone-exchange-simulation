@@ -41,7 +41,9 @@
             this.numberTextBox.Name = "numberTextBox";
             this.numberTextBox.Size = new System.Drawing.Size(184, 33);
             this.numberTextBox.TabIndex = 0;
-            this.numberTextBox.Text = "Enter number";
+            this.numberTextBox.Text = "Enter a number";
+            this.numberTextBox.Enter += new System.EventHandler(numberTextBox_Enter);
+            this.numberTextBox.Leave += new System.EventHandler(numberTextBox_Leave);
             // 
             // passwordTextBox
             // 
@@ -52,6 +54,8 @@
             this.passwordTextBox.Size = new System.Drawing.Size(184, 33);
             this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.Text = "password";
+            this.passwordTextBox.Enter += new System.EventHandler(passwordTextBox_Enter);
+            this.passwordTextBox.Leave += new System.EventHandler(passwordTextBox_Leave);
             // 
             // loginBtn
             // 

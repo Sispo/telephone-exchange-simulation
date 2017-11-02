@@ -7,35 +7,107 @@ using System.Threading.Tasks;
 namespace ATC
 {
     public delegate void LogDelegate(string message);
-    public class User
+    public class User: Transmitter
     {
-        private string _id;
         private ATC currentATC;
 
         public event LogDelegate log;
-        
-        public string id
+        public event UserConnectionDelegate sendSignal;
+
+        bool isTryingToConnect = false;
+        bool isReceivingCall = false;
+
+        public User(string id, ATC atc) : base(id)
+        {
+            currentATC = atc;
+            sendSignal += logOutgoingSignal;
+        }
+
+        public string GlobalID
         {
             get
             {
-                return _id;
+                return currentATC.id + id;
             }
         }
 
-        public User(string id, ATC atc)
+        public void send(SignalType type, string message)
         {
-            _id = id;
-            currentATC = atc;
+            sendSignal(new Signal((Transmitter)this, type, message));
         }
 
-        public void receive(Signal signal)
+        public void handle(Signal signal)
         {
+            if (signal.sender is ATC)
+            {
+                switch (signal.type)
+                {
+                    case SignalType.call:
 
+                        if (isTryingToConnect)
+                        {
+                            isTryingToConnect = false;
+                            log($"{signal.sender.id}: Waiting for the responce from {signal.message}");
+                        }
+                        else
+                        {
+                            isReceivingCall = true;
+                            log($"{signal.sender.id}: {signal.message} is calling you...");
+                        }
+
+                        break;
+                    case SignalType.tone:
+                        log($"{signal.sender.id}: {signal.message}");
+                        break;
+                    case SignalType.busy:
+                        log($"{signal.sender.id}: User is busy. Try again later.");
+                        break;
+                    case SignalType.offline:
+                        log($"{signal.sender.id}: User is offline. Try again later.");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (signal.sender is User)
+            {
+                User sender = signal.sender as User;
+
+                if (signal.type == SignalType.message)
+                {
+                    log($"{sender.id}: {signal.message}");
+                }
+            }
         }
 
-        public void send(Signal signal)
+        void logOutgoingSignal(Signal signal)
         {
-
+            switch (signal.type)
+            {
+                case SignalType.cancel:
+                    log("Canceled call.");
+                    isTryingToConnect = false;
+                    break;
+                case SignalType.message:
+                    log($"{id}: {signal.message}");
+                    break;
+                case SignalType.number:
+                    log(signal.message);
+                    break;
+                case SignalType.phone:
+                    if (isReceivingCall)
+                    {
+                        isReceivingCall = false;
+                        log("Accepted call.");
+                    } else
+                    {
+                        log("Calling...");
+                        isTryingToConnect = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

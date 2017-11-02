@@ -16,34 +16,43 @@ namespace ATC
         public UserScreen()
         {
             InitializeComponent();
+            this.Name = $"User Screen";
+            logGridView.ColumnCount = 1;
+            logGridView.ColumnHeadersVisible = false;
+            logGridView.RowHeadersVisible = false;
+            logGridView.Columns[0].Width = 355;
+            logGridView.ScrollBars = ScrollBars.Vertical;
+            logGridView.ClearSelection();
         }
 
         public void log(string message)
         {
-
+            logGridView.Rows.Add(message);
+            logGridView.ClearSelection();
         }
 
         private void numberBtn_Click(object sender, EventArgs e)
         {
             string number = Convert.ToString((sender as Control).Tag);
-            user.send(new Signal(SignalType.number, number));
+            user.send(SignalType.number, number);
         }
 
         private void callBtn_Click(object sender, EventArgs e)
         {
-            user.send(new Signal(SignalType.phone));
+            user.send(SignalType.phone,null);
         }
 
         private void endBtn_Click(object sender, EventArgs e)
         {
-            user.send(new Signal(SignalType.cancel));
+            user.send(SignalType.cancel,null);
         }
 
         private void messageTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                user.send(new Signal(SignalType.message, messageTextBox.Text));
+                user.send(SignalType.message, messageTextBox.Text);
+                messageTextBox.Clear();
             }
         }
     }

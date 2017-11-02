@@ -50,7 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ATC.cs" />
+    <Compile Include="ATCNameService.cs" />
     <Compile Include="ATCService.cs" />
+    <Compile Include="Connection.cs" />
     <Compile Include="DatabaseService.cs" />
     <Compile Include="HashService.cs" />
     <Compile Include="LoginScreen.cs">
@@ -61,6 +63,7 @@
     </Compile>
     <Compile Include="LoginService.cs" />
     <Compile Include="Signal.cs" />
+    <Compile Include="Transmitter.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserScreen.cs">
       <SubType>Form</SubType>

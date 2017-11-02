@@ -8,7 +8,7 @@ namespace ATC
 {
     class ATCService
     {
-        public static ATC local;
-        public static ATC city;
+        public static ATC local = new ATC("8","Mini");
+        public static ATC city = new ATC("9","City");
     }
 }

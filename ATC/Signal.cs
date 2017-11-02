@@ -11,6 +11,7 @@ namespace ATC
     {
         private SignalType _type;
         private string _message;
+        private Transmitter _sender;
 
         public SignalType type
         {
@@ -28,16 +29,26 @@ namespace ATC
             }
         }
 
-        public Signal(SignalType type)
+        public Transmitter sender
+        {
+            get
+            {
+                return _sender;
+            }
+        }
+
+        public Signal(Transmitter sender, SignalType type)
         {
             _type = type;
+            _sender = sender;
             _message = null;
         }
 
-        public Signal(SignalType type, string message)
+        public Signal(Transmitter sender, SignalType type, string message)
         {
             _type = type;
             _message = message;
+            _sender = sender;
         }
     }
 }

@@ -55,6 +55,7 @@
             this.logGridView.Name = "logGridView";
             this.logGridView.Size = new System.Drawing.Size(354, 176);
             this.logGridView.TabIndex = 0;
+            this.logGridView.TabStop = false;
             // 
             // button1
             // 
@@ -188,10 +189,11 @@
             // 
             // messageTextBox
             // 
+            this.messageTextBox.AcceptsReturn = true;
             this.messageTextBox.Location = new System.Drawing.Point(27, 194);
             this.messageTextBox.Name = "messageTextBox";
             this.messageTextBox.Size = new System.Drawing.Size(354, 20);
-            this.messageTextBox.TabIndex = 13;
+            this.messageTextBox.TabIndex = 0;
             this.messageTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.messageTextBox_KeyDown);
             // 
             // UserScreen

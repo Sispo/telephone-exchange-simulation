@@ -8,28 +8,28 @@ using System.IO;
 
 namespace ATC
 {
-    class DatabaseService
+    class ATCNameService
     {
-        public static bool Save(string atcName, string id, string passwordHash)
+        public static bool Save(string atcName, string id)
         {
-            Dictionary<string, string> db = DatabaseService.Load(atcName);
+            Dictionary<string, string> ATCNameServiceDataBase = ATCNameService.Load();
 
-            if (db == null)
+            if (ATCNameServiceDataBase == null)
             {
-                db = new Dictionary<string, string>();
+                ATCNameServiceDataBase = new Dictionary<string, string>();
             }
 
-            db[id] = passwordHash;
+            ATCNameServiceDataBase[id] = atcName;
 
             BinaryFormatter bf = new BinaryFormatter();
 
-            FileStream fsout = new FileStream($"{atcName}.dat", FileMode.Create, FileAccess.Write, FileShare.None);
+            FileStream fsout = new FileStream($"ANS.dat", FileMode.Create, FileAccess.Write, FileShare.None);
 
             try
             {
                 using (fsout)
                 {
-                    bf.Serialize(fsout, db);
+                    bf.Serialize(fsout, ATCNameServiceDataBase);
                     return true;
                 }
             }
@@ -46,10 +46,27 @@ namespace ATC
                 }
             }
         }
-        public static Dictionary<string, string> Load(string atcName)
+
+        public static string GetName(string id)
+        {
+            Dictionary<string, string> ATCNameServiceDataBase = Load();
+
+            if (ATCNameServiceDataBase == null)
+            {
+                return null;
+            }
+
+            if (ATCNameServiceDataBase.ContainsKey(id))
+            {
+                return ATCNameServiceDataBase[id];
+            }
+
+            return null;
+        }
+        public static Dictionary<string, string> Load()
         {
             BinaryFormatter bf = new BinaryFormatter();
-            string fileName = $"{atcName}.dat";
+            string fileName = $"ANS.dat";
             if (File.Exists(fileName))
             {
                 FileStream fsin = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
@@ -72,11 +89,13 @@ namespace ATC
                         fsin.Close();
                     }
                 }
-            } else
+            }
+            else
             {
                 return null;
             }
-            
+
         }
+
     }
 }
