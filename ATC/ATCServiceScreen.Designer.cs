@@ -113,6 +113,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            this.onlineGridView.SelectionChanged += dataGridView_SelectionChanged;
+
         }
 
         #endregion

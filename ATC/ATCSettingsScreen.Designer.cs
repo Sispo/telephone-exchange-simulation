@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ATCSettingsScreen));
+
             this.atcGridView = new System.Windows.Forms.DataGridView();
             this.atcLbl = new System.Windows.Forms.Label();
             this.usersLbl = new System.Windows.Forms.Label();
@@ -140,6 +141,11 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            this.atcGridView.SelectionChanged += dataGridView_SelectionChanged;
+            this.usersGridView.SelectionChanged += dataGridView_SelectionChanged;
+            this.connectionsGridView.SelectionChanged += dataGridView_SelectionChanged;
+            this.logsGridView.SelectionChanged += dataGridView_SelectionChanged;
+            this.FormClosing += SettingsScreen_FormClosing;
         }
 
         #endregion

@@ -87,12 +87,8 @@
             this.Text = "Welcome";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.FormClosing += WelcomeScreen_FormClosing;
 
-        }
-
-        private void WelcomeScreen_FormClosing1(object sender, System.Windows.Forms.FormClosingEventArgs e)
-        {
-            throw new System.NotImplementedException();
         }
 
         #endregion

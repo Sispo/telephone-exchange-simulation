@@ -62,14 +62,28 @@ namespace ATC
 
             foreach (ATC onlineAtc in ATCService.shared.onlineATCs)
             {
-                atcGridView.Rows.Add(onlineAtc.nameExtended);
-                if (this.atc.connectedATCs.Exists(a => a.id == onlineAtc.id))
+                if (onlineAtc.id != this.atc.id)
                 {
-                    atcGridView.Rows[atcGridView.Rows.Count - 1].Cells[0].Style.BackColor = Color.Green;
+                    atcGridView.Rows.Add(onlineAtc.nameExtended);
+                    if (this.atc.connectedATCs.Exists(a => a.id == onlineAtc.id))
+                    {
+                        atcGridView.Rows[atcGridView.Rows.Count - 2].Cells[0].Style.BackColor = Color.Green;
+                        atcGridView.Rows[atcGridView.Rows.Count - 2].Cells[0].Style.ForeColor = Color.White;
+                    }
                 }
             }
         }
 
+        private void dataGridView_SelectionChanged(Object sender, EventArgs e)
+        {
+            (sender as DataGridView).ClearSelection();
+        }
 
+        private void SettingsScreen_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            ATCService.shared.stateUpdated -= updateOnlineATCList;
+            atc.logEvent -= AddLog;
+            atc = null;
+        }
     }
 }

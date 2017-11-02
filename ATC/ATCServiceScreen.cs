@@ -61,5 +61,11 @@ namespace ATC
             ATCLoginScreen ls = new ATCLoginScreen();
             ls.Show();
         }
+
+        private void dataGridView_SelectionChanged(Object sender, EventArgs e)
+        {
+            (sender as DataGridView).ClearSelection();
+        }
+
     }
 }

@@ -21,6 +21,7 @@ namespace ATC
         {
             InitializeComponent();
             nameLbl.Text = ATCNameService.GetName(atc.id).ToUpper();
+            this.Text = atc.name;
             this.atc = atc;
             settingsScreen = new ATCSettingsScreen(atc);
             ATCService.shared.connect(atc);
@@ -28,7 +29,12 @@ namespace ATC
 
         private void WelcomeScreen_FormClosing(Object sender, FormClosingEventArgs e)
         {
+            settingsScreen.Close();
+            settingsScreen.Dispose();
+            settingsScreen = null;
             ATCService.shared.disconnect(atc);
+            atc.disconnect();
+            atc = null;
         }
 
         private void connectBtn_Click(object sender, EventArgs e)

@@ -66,11 +66,14 @@ namespace ATC
                 }
             }
             onlineATCs.Add(atc);
+            atc.connectionsChanged += stateUpdated;
+            stateUpdated();
         }
 
         public void disconnect(ATC atc)
         {
             onlineATCs.Remove(atc);
+            stateUpdated();
         }
 
         string getNewATCid()

@@ -9,7 +9,7 @@ namespace ATC
     public delegate void LogDelegate(string message);
     public class User: Transmitter
     {
-        private ATC currentATC;
+        public ATC currentATC;
 
         public event LogDelegate log;
         public event UserConnectionDelegate sendSignal;
@@ -65,7 +65,8 @@ namespace ATC
                     case SignalType.offline:
                         log($"{signal.sender.id}: User is offline. Try again later.");
                         break;
-                    default:
+                    case SignalType.cancel:
+                        log($"{signal.sender.id}: {signal.message} disconnected.");
                         break;
                 }
             }
@@ -113,7 +114,10 @@ namespace ATC
         public void disconnect()
         {
             send(SignalType.cancel, null);
-            this.currentATC.disconnect(this);
+            if (currentATC != null)
+            {
+                this.currentATC.disconnect(this);
+            }
         }
     }
 }
