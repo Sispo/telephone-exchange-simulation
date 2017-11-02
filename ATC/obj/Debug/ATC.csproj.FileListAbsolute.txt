@@ -22,3 +22,4 @@ C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\obj\Debug\ATC.Properties.Resources.res
 C:\Users\zao.CCD.000\Desktop\labs\ATC\ATC\obj\Debug\ATC.csproj.GenerateResource.Cache
 C:\Users\Sispo\Documents\Visual Studio 2015\Projects\ATC\ATC\obj\Debug\ATC.ATCLoginScreen.resources
 C:\Users\Sispo\Documents\Visual Studio 2015\Projects\ATC\ATC\obj\Debug\ATC.ATCServiceScreen.resources
+C:\Users\Sispo\Documents\Visual Studio 2015\Projects\ATC\ATC\obj\Debug\ATC.ATCSettingsScreen.resources

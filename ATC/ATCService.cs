@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace ATC
 {
 
-    class ATCLoginResult
+    public delegate void ActionDelegate();
+    public class ATCLoginResult
     {
         public string error;
         public bool isSuccessfull;
@@ -22,43 +23,64 @@ namespace ATC
     }
     class ATCService
     {
+
+        public event ActionDelegate stateUpdated;
+
         public static ATCService shared = new ATCService();
 
         public List<ATC> onlineATCs = new List<ATC>();
 
-        //public ATCLoginResult enable(string name, string id, bool isTryingToEnableNew)
-        //{
-        //    if (id != null)
-        //    {
-        //        if (onlineATCs.Exists(atc => atc.id == id))
-        //        {
-        //            return new ATCLoginResult(false, "This ATC is already online.", null);
-        //        } else
-        //        {
-        //            return new ATCLoginResult(true, null, new ATC(id, name));
-        //        }
-        //    } else
-        //    {
-        //        if (isTryingToEnableNew)
-        //        {
-                    
-        //        } else
-        //        {
+        public ATCLoginResult Enable(string name, string id)
+        {
+            if (id != null)
+            {
+                if (onlineATCs.Exists(atc => atc.id == id))
+                {
+                    return new ATCLoginResult(false, "This ATC is already online.", null);
+                }
+                else
+                {
+                    return new ATCLoginResult(true, null, new ATC(id, name));
+                }
+            }
+            else
+            {
+                string newATCid = getNewATCid();
+                if (Convert.ToInt32(newATCid) > 99)
+                {
+                    return new ATCLoginResult(false, "Maximum number of ATCs is already in use.", null);
+                }
 
-        //        }
-        //    }
-        //}
+                return new ATCLoginResult(true, null, new ATC(newATCid, name));
+            }
+        }
 
-        //string getNewATCid()
-        //{
-        //    string id = "00";
-        //    while (DatabaseService.ATCExists(id))
-        //    {
-        //        int intID = Convert.ToInt32(id);
-        //        intID++;
-        //        id = intID.ToString();
-        //    }
-        //    while (DatabaseService)
-        //}
+        public void connect(ATC atc)
+        {
+            foreach(ATC a in onlineATCs)
+            {
+                if (atc.id != a.id)
+                {
+                    a.connect(atc);
+                    atc.connect(a);
+                }
+            }
+            onlineATCs.Add(atc);
+        }
+
+        public void disconnect(ATC atc)
+        {
+            onlineATCs.Remove(atc);
+        }
+
+        string getNewATCid()
+        {
+            string id = "00";
+            while (DatabaseService.ATCExists(id))
+            {
+                id = IdUtility.IncrementStringID(id);
+            }
+            return id;
+        }
     }
 }

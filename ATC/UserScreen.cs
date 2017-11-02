@@ -29,6 +29,7 @@ namespace ATC
         {
             logGridView.Rows.Add(message);
             logGridView.ClearSelection();
+            logGridView.FirstDisplayedScrollingRowIndex = logGridView.RowCount - 1;
         }
 
         private void numberBtn_Click(object sender, EventArgs e)
@@ -53,7 +54,15 @@ namespace ATC
             {
                 user.send(SignalType.message, messageTextBox.Text);
                 messageTextBox.Clear();
+
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
+        }
+
+        private void UserScreen_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            user.disconnect();
         }
     }
 }

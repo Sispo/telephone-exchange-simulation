@@ -32,9 +32,9 @@
             this.firstATCBtn = new System.Windows.Forms.Button();
             this.secondATCBtn = new System.Windows.Forms.Button();
             this.anotherBtn = new System.Windows.Forms.Button();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.onlineGridView = new System.Windows.Forms.DataGridView();
             this.onlineLbl = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.onlineGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // firstATCBtn
@@ -76,14 +76,14 @@
             this.anotherBtn.UseVisualStyleBackColor = false;
             this.anotherBtn.Click += new System.EventHandler(this.anotherBtn_Click);
             // 
-            // dataGridView
+            // onlineGridView
             // 
-            this.dataGridView.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(247, 65);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(166, 246);
-            this.dataGridView.TabIndex = 4;
+            this.onlineGridView.BackgroundColor = System.Drawing.Color.White;
+            this.onlineGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.onlineGridView.Location = new System.Drawing.Point(247, 65);
+            this.onlineGridView.Name = "onlineGridView";
+            this.onlineGridView.Size = new System.Drawing.Size(166, 246);
+            this.onlineGridView.TabIndex = 4;
             // 
             // onlineLbl
             // 
@@ -100,7 +100,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 352);
             this.Controls.Add(this.onlineLbl);
-            this.Controls.Add(this.dataGridView);
+            this.Controls.Add(this.onlineGridView);
             this.Controls.Add(this.anotherBtn);
             this.Controls.Add(this.secondATCBtn);
             this.Controls.Add(this.firstATCBtn);
@@ -109,7 +109,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ATCServiceScreen";
             this.Text = "ATC Service";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.onlineGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,7 +120,7 @@
         private System.Windows.Forms.Button firstATCBtn;
         private System.Windows.Forms.Button secondATCBtn;
         private System.Windows.Forms.Button anotherBtn;
-        private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.DataGridView onlineGridView;
         private System.Windows.Forms.Label onlineLbl;
     }
 }

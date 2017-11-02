@@ -109,5 +109,11 @@ namespace ATC
                     break;
             }
         }
+
+        public void disconnect()
+        {
+            send(SignalType.cancel, null);
+            this.currentATC.disconnect(this);
+        }
     }
 }

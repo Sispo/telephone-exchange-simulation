@@ -29,64 +29,54 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ATCLoginScreen));
-            this.loginBtn = new System.Windows.Forms.Button();
-            this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.numberTextBox = new System.Windows.Forms.TextBox();
-            this.checkBox = new System.Windows.Forms.CheckBox();
+            this.enableBtn = new System.Windows.Forms.Button();
+            this.idTextBox = new System.Windows.Forms.TextBox();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // loginBtn
+            // enableBtn
             // 
-            this.loginBtn.BackColor = System.Drawing.Color.DarkCyan;
-            this.loginBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginBtn.ForeColor = System.Drawing.Color.White;
-            this.loginBtn.Location = new System.Drawing.Point(24, 134);
-            this.loginBtn.Name = "loginBtn";
-            this.loginBtn.Size = new System.Drawing.Size(184, 39);
-            this.loginBtn.TabIndex = 5;
-            this.loginBtn.Text = "Enable";
-            this.loginBtn.UseVisualStyleBackColor = false;
+            this.enableBtn.BackColor = System.Drawing.Color.DarkCyan;
+            this.enableBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enableBtn.ForeColor = System.Drawing.Color.White;
+            this.enableBtn.Location = new System.Drawing.Point(24, 114);
+            this.enableBtn.Name = "enableBtn";
+            this.enableBtn.Size = new System.Drawing.Size(184, 39);
+            this.enableBtn.TabIndex = 5;
+            this.enableBtn.Text = "Enable";
+            this.enableBtn.UseVisualStyleBackColor = false;
+            this.enableBtn.Click += new System.EventHandler(this.enableBtn_Click);
             // 
-            // passwordTextBox
+            // idTextBox
             // 
-            this.passwordTextBox.ForeColor = System.Drawing.Color.DimGray;
-            this.passwordTextBox.Location = new System.Drawing.Point(24, 63);
-            this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(184, 29);
-            this.passwordTextBox.TabIndex = 4;
-            this.passwordTextBox.Text = "Automatic ID";
+            this.idTextBox.ForeColor = System.Drawing.Color.DimGray;
+            this.idTextBox.Location = new System.Drawing.Point(24, 63);
+            this.idTextBox.Name = "idTextBox";
+            this.idTextBox.Size = new System.Drawing.Size(184, 29);
+            this.idTextBox.TabIndex = 4;
+            this.idTextBox.Text = "Automatic ID";
+            this.idTextBox.Enter += idTextBox_Enter;
+            this.idTextBox.Leave += idTextBox_Leave;
             // 
-            // numberTextBox
+            // nameTextBox
             // 
-            this.numberTextBox.ForeColor = System.Drawing.Color.DimGray;
-            this.numberTextBox.Location = new System.Drawing.Point(24, 24);
-            this.numberTextBox.Name = "numberTextBox";
-            this.numberTextBox.Size = new System.Drawing.Size(184, 29);
-            this.numberTextBox.TabIndex = 3;
-            this.numberTextBox.Text = "Enter ATC Name";
-            // 
-            // checkBox
-            // 
-            this.checkBox.AutoSize = true;
-            this.checkBox.Checked = true;
-            this.checkBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox.Location = new System.Drawing.Point(25, 103);
-            this.checkBox.Name = "checkBox";
-            this.checkBox.Size = new System.Drawing.Size(183, 21);
-            this.checkBox.TabIndex = 6;
-            this.checkBox.Text = "I want to enable a new ATC";
-            this.checkBox.UseVisualStyleBackColor = true;
+            this.nameTextBox.ForeColor = System.Drawing.Color.DimGray;
+            this.nameTextBox.Location = new System.Drawing.Point(24, 24);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(184, 29);
+            this.nameTextBox.TabIndex = 3;
+            this.nameTextBox.Text = "Enter ATC Name";
+            this.nameTextBox.Enter += nameTextBox_Enter;
+            this.nameTextBox.Leave += nameTextBox_Leave;
             // 
             // ATCLoginScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(232, 185);
-            this.Controls.Add(this.checkBox);
-            this.Controls.Add(this.loginBtn);
-            this.Controls.Add(this.passwordTextBox);
-            this.Controls.Add(this.numberTextBox);
+            this.ClientSize = new System.Drawing.Size(232, 172);
+            this.Controls.Add(this.enableBtn);
+            this.Controls.Add(this.idTextBox);
+            this.Controls.Add(this.nameTextBox);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -99,9 +89,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button loginBtn;
-        private System.Windows.Forms.TextBox passwordTextBox;
-        private System.Windows.Forms.TextBox numberTextBox;
-        private System.Windows.Forms.CheckBox checkBox;
+        private System.Windows.Forms.Button enableBtn;
+        private System.Windows.Forms.TextBox idTextBox;
+        private System.Windows.Forms.TextBox nameTextBox;
     }
 }

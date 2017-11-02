@@ -15,32 +15,45 @@ namespace ATC
         public ATCServiceScreen()
         {
             InitializeComponent();
+            onlineGridView.ColumnCount = 1;
+            onlineGridView.RowHeadersVisible = false;
+            onlineGridView.ColumnHeadersVisible = false;
+            onlineGridView.ScrollBars = ScrollBars.Vertical;
+            onlineGridView.Columns[0].Width = 160;
+            ATCService.shared.stateUpdated += updateOnlineList;
         }
 
-        string incrementStringID(string id)
+        private void updateOnlineList()
         {
-            int length = id.Length;
-            string newId = (Convert.ToInt32(id) + 1).ToString();
-            while (newId.Length != length)
+            onlineGridView.Rows.Clear();
+
+            foreach(ATC atc in ATCService.shared.onlineATCs)
             {
-                newId = "0" + newId;
+                onlineGridView.Rows.Add(atc.nameExtended);
             }
-            return newId;
+        }
+
+        private void handle(ATCLoginResult result)
+        {
+            if (result.isSuccessfull)
+            {
+                WelcomeScreen ws = new WelcomeScreen(result.atc);
+                ws.Show();
+            }
+            else
+            {
+                MessageBox.Show(result.error);
+            }
         }
 
         private void firstATCBtn_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(incrementStringID("001"));
-            Console.WriteLine(incrementStringID("015"));
-            Console.WriteLine(incrementStringID("5"));
-            Console.WriteLine(incrementStringID("05"));
-            Console.WriteLine(incrementStringID("15"));
-            Console.WriteLine(incrementStringID("0008"));
+            handle(ATCService.shared.Enable("Mini", "00"));
         }
 
         private void secondATCBtn_Click(object sender, EventArgs e)
         {
-
+            handle(ATCService.shared.Enable("City", "09"));
         }
 
         private void anotherBtn_Click(object sender, EventArgs e)

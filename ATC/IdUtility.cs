@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace ATC
 {
-    class StringIdUtility
+    public class IdUtility
     {
+        public static string IncrementStringID(string id)
+        {
+            int length = id.Length;
+            string newId = (Convert.ToInt32(id) + 1).ToString();
+            while (newId.Length != length)
+            {
+                newId = "0" + newId;
+            }
+            return newId;
+        }
     }
 }

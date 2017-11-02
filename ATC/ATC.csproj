@@ -64,6 +64,12 @@
     <Compile Include="ATCServiceScreen.Designer.cs">
       <DependentUpon>ATCServiceScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="ATCSettingsScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ATCSettingsScreen.Designer.cs">
+      <DependentUpon>ATCSettingsScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Connection.cs" />
     <Compile Include="DatabaseService.cs" />
     <Compile Include="HashService.cs" />
@@ -75,6 +81,7 @@
     </Compile>
     <Compile Include="LoginService.cs" />
     <Compile Include="Signal.cs" />
+    <Compile Include="IdUtility.cs" />
     <Compile Include="Transmitter.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserScreen.cs">
@@ -96,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ATCServiceScreen.resx">
       <DependentUpon>ATCServiceScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ATCSettingsScreen.resx">
+      <DependentUpon>ATCSettingsScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginScreen.resx">
       <DependentUpon>LoginScreen.cs</DependentUpon>
