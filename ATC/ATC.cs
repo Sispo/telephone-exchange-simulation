@@ -73,6 +73,17 @@ namespace ATC
             return id;
         }
 
+        string incrementStringID(string id)
+        {
+            int length = id.Length;
+            string newId = (Convert.ToInt32(id) + 1).ToString();
+            while(newId.Length != length)
+            {
+                newId.Insert(0, "0");
+            }
+            return newId;
+        }
+
         string getATCid(string GlobalID)
         {
             return GlobalID[0].ToString() + GlobalID[1].ToString();

@@ -30,8 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WelcomeScreen));
             this.connectBtn = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.nameLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            this.FormClosing += WelcomeScreen_FormClosing;
             // 
             // connectBtn
             // 
@@ -46,22 +47,22 @@
             this.connectBtn.UseVisualStyleBackColor = false;
             this.connectBtn.Click += new System.EventHandler(this.connectBtn_Click);
             // 
-            // label1
+            // nameLbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Light", 24F);
-            this.label1.Location = new System.Drawing.Point(33, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 45);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "MINI-ATC";
+            this.nameLbl.AutoSize = true;
+            this.nameLbl.Font = new System.Drawing.Font("Segoe UI Light", 24F);
+            this.nameLbl.Location = new System.Drawing.Point(33, 39);
+            this.nameLbl.Name = "nameLbl";
+            this.nameLbl.Size = new System.Drawing.Size(148, 45);
+            this.nameLbl.TabIndex = 2;
+            this.nameLbl.Text = "MINI-ATC";
             // 
             // WelcomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(222, 208);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nameLbl);
             this.Controls.Add(this.connectBtn);
             this.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -73,10 +74,15 @@
 
         }
 
+        private void WelcomeScreen_FormClosing1(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
 
         private System.Windows.Forms.Button connectBtn;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label nameLbl;
     }
 }
 

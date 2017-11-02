@@ -217,7 +217,7 @@
             this.Controls.Add(this.logGridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserScreen";
-            this.Text = "UserScreen";
+            this.Text = "User Screen";
             ((System.ComponentModel.ISupportInitialize)(this.logGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

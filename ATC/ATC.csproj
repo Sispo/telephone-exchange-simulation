@@ -50,8 +50,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ATC.cs" />
+    <Compile Include="ATCLoginScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ATCLoginScreen.Designer.cs">
+      <DependentUpon>ATCLoginScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="ATCNameService.cs" />
     <Compile Include="ATCService.cs" />
+    <Compile Include="ATCServiceScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ATCServiceScreen.Designer.cs">
+      <DependentUpon>ATCServiceScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Connection.cs" />
     <Compile Include="DatabaseService.cs" />
     <Compile Include="HashService.cs" />
@@ -79,6 +91,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ATCLoginScreen.resx">
+      <DependentUpon>ATCLoginScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ATCServiceScreen.resx">
+      <DependentUpon>ATCServiceScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginScreen.resx">
       <DependentUpon>LoginScreen.cs</DependentUpon>
     </EmbeddedResource>

@@ -12,14 +12,24 @@ namespace ATC
 {
     public partial class WelcomeScreen : Form
     {
-        public WelcomeScreen()
+
+        public ATC atc;
+
+        public WelcomeScreen(ATC atc)
         {
             InitializeComponent();
+            nameLbl.Text = ATCNameService.GetName(atc.id).ToUpper();
+            this.atc = atc;
+        }
+
+        private void WelcomeScreen_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            ATCService.shared.onlineATCs.Remove(atc);
         }
 
         private void connectBtn_Click(object sender, EventArgs e)
         {
-            Login loginScreen = new Login();
+            Login loginScreen = new Login(atc);
             loginScreen.Show();
         }
     }

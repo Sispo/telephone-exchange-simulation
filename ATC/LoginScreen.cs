@@ -12,9 +12,11 @@ namespace ATC
 {
     public partial class Login : Form
     {
-        public Login()
+        public ATC atc;
+        public Login(ATC atc)
         {
             InitializeComponent();
+            this.atc = atc;
         }
         private void numberTextBox_Enter(object sender, EventArgs e)
         {
@@ -53,7 +55,7 @@ namespace ATC
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            LoginResult result = LoginService.login(numberTextBox.Text, passwordTextBox.Text, ATCService.local);
+            LoginResult result = LoginService.login(numberTextBox.Text, passwordTextBox.Text, atc);
 
             if (result.isSuccessfull)
             {

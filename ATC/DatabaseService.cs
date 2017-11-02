@@ -10,9 +10,9 @@ namespace ATC
 {
     class DatabaseService
     {
-        public static bool Save(string atcName, string id, string passwordHash)
+        public static bool Save(string atcId, string id, string passwordHash)
         {
-            Dictionary<string, string> db = DatabaseService.Load(atcName);
+            Dictionary<string, string> db = DatabaseService.Load(atcId);
 
             if (db == null)
             {
@@ -23,7 +23,7 @@ namespace ATC
 
             BinaryFormatter bf = new BinaryFormatter();
 
-            FileStream fsout = new FileStream($"{atcName}.dat", FileMode.Create, FileAccess.Write, FileShare.None);
+            FileStream fsout = new FileStream($"{atcId}.dat", FileMode.Create, FileAccess.Write, FileShare.None);
 
             try
             {
@@ -46,10 +46,10 @@ namespace ATC
                 }
             }
         }
-        public static Dictionary<string, string> Load(string atcName)
+        public static Dictionary<string, string> Load(string atcId)
         {
             BinaryFormatter bf = new BinaryFormatter();
-            string fileName = $"{atcName}.dat";
+            string fileName = $"{atcId}.dat";
             if (File.Exists(fileName))
             {
                 FileStream fsin = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
@@ -77,6 +77,11 @@ namespace ATC
                 return null;
             }
             
+        }
+
+        public static bool ATCExists(string atcId)
+        {
+            return File.Exists($"{atcId}.dat");
         }
     }
 }
