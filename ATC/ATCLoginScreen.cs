@@ -65,6 +65,7 @@ namespace ATC
                 {
                     WelcomeScreen ws = new WelcomeScreen(result.atc);
                     ws.Show();
+                    this.Close();
                 } else
                 {
                     MessageBox.Show(result.error);

@@ -42,8 +42,8 @@
             this.numberTextBox.Size = new System.Drawing.Size(184, 33);
             this.numberTextBox.TabIndex = 0;
             this.numberTextBox.Text = "Enter a number";
-            this.numberTextBox.Enter += new System.EventHandler(numberTextBox_Enter);
-            this.numberTextBox.Leave += new System.EventHandler(numberTextBox_Leave);
+            this.numberTextBox.Enter += new System.EventHandler(this.numberTextBox_Enter);
+            this.numberTextBox.Leave += new System.EventHandler(this.numberTextBox_Leave);
             // 
             // passwordTextBox
             // 
@@ -54,13 +54,13 @@
             this.passwordTextBox.Size = new System.Drawing.Size(184, 33);
             this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.Text = "password";
-            this.passwordTextBox.Enter += new System.EventHandler(passwordTextBox_Enter);
-            this.passwordTextBox.Leave += new System.EventHandler(passwordTextBox_Leave);
+            this.passwordTextBox.Enter += new System.EventHandler(this.passwordTextBox_Enter);
+            this.passwordTextBox.Leave += new System.EventHandler(this.passwordTextBox_Leave);
             // 
             // loginBtn
             // 
             this.loginBtn.BackColor = System.Drawing.Color.DarkCyan;
-            this.loginBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginBtn.ForeColor = System.Drawing.Color.White;
             this.loginBtn.Location = new System.Drawing.Point(24, 116);
             this.loginBtn.Name = "loginBtn";
@@ -81,7 +81,7 @@
             this.Controls.Add(this.numberTextBox);
             this.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Login";
             this.Text = "LoginScreen";
             this.ResumeLayout(false);

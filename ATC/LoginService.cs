@@ -51,7 +51,15 @@ namespace ATC
 
                 if (HashService.VerifyMd5Hash(password,passwordHash))
                 {
-                    return new LoginResult(true, null, connectUser(id,atc));
+                    User user = connectUser(id, atc);
+                    if (user != null)
+                    {
+                        return new LoginResult(true, null, user);
+                    } else
+                    {
+                        return new LoginResult(false, "User is already connected.", null);
+                    }
+                    
                 } else
                 {
                     return new LoginResult(false, "Incorrect password.", null);
@@ -69,7 +77,15 @@ namespace ATC
         {
             if (DatabaseService.Save(atc.id, id, HashService.GetMd5Hash(password)))
             {
-                return new LoginResult(true, null, connectUser(id, atc));
+                User user = connectUser(id, atc);
+                if (user != null)
+                {
+                    return new LoginResult(true, null, user);
+                }
+                else
+                {
+                    return new LoginResult(false, "User is already connected.", null);
+                }
             }
             else
             {
@@ -80,8 +96,14 @@ namespace ATC
         static User connectUser(string id, ATC atc)
         {
             User user = new User(id, atc);
-            atc.connect(user);
-            return user;
+            if (atc.connect(user))
+            {
+                return user;
+            } else
+            {
+                return null;
+            }
+            
         }
 
     }

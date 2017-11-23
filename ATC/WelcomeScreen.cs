@@ -25,16 +25,16 @@ namespace ATC
             this.atc = atc;
             settingsScreen = new ATCSettingsScreen(atc);
             ATCService.shared.connect(atc);
+            this.FormClosing += WelcomeScreen_FormClosing;
         }
 
         private void WelcomeScreen_FormClosing(Object sender, FormClosingEventArgs e)
         {
+            settingsScreen.disconnect();
             settingsScreen.Close();
             settingsScreen.Dispose();
-            settingsScreen = null;
             ATCService.shared.disconnect(atc);
             atc.disconnect();
-            atc = null;
         }
 
         private void connectBtn_Click(object sender, EventArgs e)
@@ -45,6 +45,10 @@ namespace ATC
 
         private void settingsBtn_Click(object sender, EventArgs e)
         {
+            if (settingsScreen.IsDisposed)
+            {
+                settingsScreen = new ATCSettingsScreen(atc);
+            }
             settingsScreen.Show();
         }
     }

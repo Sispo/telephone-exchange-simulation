@@ -145,7 +145,6 @@
             this.usersGridView.SelectionChanged += dataGridView_SelectionChanged;
             this.connectionsGridView.SelectionChanged += dataGridView_SelectionChanged;
             this.logsGridView.SelectionChanged += dataGridView_SelectionChanged;
-            this.FormClosing += SettingsScreen_FormClosing;
         }
 
         #endregion

@@ -69,26 +69,36 @@ namespace ATC
             string fileName = $"ANS.dat";
             if (File.Exists(fileName))
             {
-                FileStream fsin = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
                 try
                 {
-                    using (fsin)
+                    FileStream fsin = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
+
+                    try
                     {
-                        return (Dictionary<string, string>)bf.Deserialize(fsin);
+
+                        using (fsin)
+                        {
+                            return (Dictionary<string, string>)bf.Deserialize(fsin);
+                        }
                     }
-                }
-                catch (Exception err)
+                    catch (Exception err)
+                    {
+                        Console.WriteLine("Error occured:" + err.Message);
+                        return null;
+                    }
+                    finally
+                    {
+                        if (fsin != null)
+                        {
+                            fsin.Close();
+                        }
+                    }
+                } catch (Exception err)
                 {
-                    Console.WriteLine("Error occured:" + err.Message);
+                    Console.WriteLine(err.Message);
                     return null;
                 }
-                finally
-                {
-                    if (fsin != null)
-                    {
-                        fsin.Close();
-                    }
-                }
+                
             }
             else
             {

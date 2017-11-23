@@ -87,7 +87,6 @@
             this.Text = "Welcome";
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.FormClosing += WelcomeScreen_FormClosing;
 
         }
 

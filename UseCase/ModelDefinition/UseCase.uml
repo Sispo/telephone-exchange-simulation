@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel"
+  dslVersion="1.0.0.0"
+  Id="9fec7433-ffb5-409a-b3b6-65d5ed2fd4c9"
+  name="UseCase" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="94b3aa75-1481-43b8-b0cd-b937a41adff0">
+      <body>Викликати іншого абонента </body>
+    </comment>
+    <comment
+      Id="0399cff5-3838-4089-93fa-226f9832c7dc">
+      <body>Обробити сигнал користувача</body>
+    </comment>
+    <comment
+      Id="d7a76f95-14d4-4e58-9fda-8515cc2ff093">
+      <body>Обробити сигнал користувача</body>
+    </comment>
+    <comment
+      Id="6a08dadc-92c5-4efa-9963-4a843b8fdaa8">
+      <body>Обробити сигнал користувача</body>
+    </comment>
+    <comment
+      Id="e51190ac-844f-4d4a-ab4b-8f22a711a7af">
+      <body>Надіслати сигнал до АТС</body>
+    </comment>
+    <comment
+      Id="d3166629-dbe0-4334-9704-4f11033af1ee">
+      <body>Надіслати сигнал до АТС</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <actor
+        Id="05291771-18bd-4584-a067-fb7bd35e9f77"
+        name="Користувач"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="5aad0a22-5f9f-4074-a177-2773d2fd731e"
+            isDerived="false"
+            sourceEndRoleName="Користувач"
+            targetEndRoleName="Викликати іншого абонента "
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="621739a9-5ee7-4b40-bc7e-b2dad35e735c"
+              LastKnownName="З'єднатися з іншим абонентом"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="edd4d248-f154-42f2-bec3-2a09b909bc5d"
+                  name="Користувач"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="33f8ef8b-02f0-4592-b22c-5738bfb59aed"
+                  name="Викликати іншого абонента "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="0d9bf467-5534-4ec9-ab12-04d54212dba9"
+            isDerived="false"
+            sourceEndRoleName="Користувач"
+            targetEndRoleName="Приймати дзвінок"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="0ee3c6f2-c3de-4067-9e63-9eaa4ff8d717"
+              LastKnownName="Приймати дзвінок"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f7c5a852-d62a-455f-9417-dac9cf8bf08d"
+                  name="Користувач"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="af3d447f-ea5e-4687-b275-aec02da97566"
+                  name="Приймати дзвінок"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="b5f3b1d6-afe7-48b6-864f-44f34e2cf96a"
+            isDerived="false"
+            sourceEndRoleName="Користувач"
+            targetEndRoleName="Скасувати дзвінок"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="68c8448a-3e09-45a4-a3b1-a9d125089246"
+              LastKnownName="Скасувати дзвінок"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="95ab000a-c1e7-45bd-9988-9ddc6eda77f9"
+                  name="Користувач"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4d33a753-9d13-41b8-95b2-ffcf04511a2a"
+                  name="Скасувати дзвінок"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="621739a9-5ee7-4b40-bc7e-b2dad35e735c"
+        name="З'єднатися з іншим абонентом"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="a5a24922-17aa-425a-9ed3-f2107e5cb8de">
+            <useCaseMoniker
+              Id="03fa1ad0-fdf5-443e-a27b-6e7e2e88b170"
+              LastKnownName="З'єднатись з іншою АТС"
+              LastKnownLocation="UseCase.uml" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0ee3c6f2-c3de-4067-9e63-9eaa4ff8d717"
+        name="Приймати дзвінок"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="68c8448a-3e09-45a4-a3b1-a9d125089246"
+        name="Скасувати дзвінок"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="75327bf8-9c3c-4eeb-b826-021db3867588">
+            <useCaseMoniker
+              Id="b49d151e-9b27-4c50-a40e-7da8e6416bfb"
+              LastKnownName="Скасувати з'єднання з іншою АТС"
+              LastKnownLocation="UseCase.uml" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="2fda7955-084a-48d3-a724-ef709a0e8297"
+        name="АТС"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="ed1fbefd-1231-4977-afb1-c8ee4c9a59f0"
+            isDerived="false"
+            sourceEndRoleName="АТС"
+            targetEndRoleName="Викликати іншого абонента "
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="621739a9-5ee7-4b40-bc7e-b2dad35e735c"
+              LastKnownName="З'єднатися з іншим абонентом"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="199987ce-c419-4df8-a064-ef2332c8c515"
+                  name="АТС"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="73af5898-bd85-47d6-9423-eefd186b920a"
+                  name="Викликати іншого абонента "
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="7670cc8a-b3a7-4dee-9d4e-0bc346d85ef4"
+            isDerived="false"
+            sourceEndRoleName="АТС"
+            targetEndRoleName="Приймати дзвінок"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="0ee3c6f2-c3de-4067-9e63-9eaa4ff8d717"
+              LastKnownName="Приймати дзвінок"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c7d0aa37-67fe-4619-8b63-1ea19268564a"
+                  name="АТС"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="198df86a-f9de-4f92-ab64-3458b1839073"
+                  name="Приймати дзвінок"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="aea6103b-3af8-43f5-a01c-723fb65c87e2"
+            isDerived="false"
+            sourceEndRoleName="АТС"
+            targetEndRoleName="Скасувати дзвінок"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="68c8448a-3e09-45a4-a3b1-a9d125089246"
+              LastKnownName="Скасувати дзвінок"
+              LastKnownLocation="UseCase.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b7a6ff45-db96-49ce-aa25-bb461a66db17"
+                  name="АТС"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ce7ae251-731a-472f-bf7f-2e541c3e44e4"
+                  name="Скасувати дзвінок"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3c99ca95-64e5-4a87-ba10-54104b427465"
+        name="UseCase1"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="03fa1ad0-fdf5-443e-a27b-6e7e2e88b170"
+        name="З'єднатись з іншою АТС"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="b49d151e-9b27-4c50-a40e-7da8e6416bfb"
+        name="Скасувати з'єднання з іншою АТС"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

@@ -9,9 +9,10 @@ namespace ATC
     public delegate void LogDelegate(string message);
     public class User: Transmitter
     {
+        public UserScreen screen;
         public ATC currentATC;
 
-        public event LogDelegate log;
+        public event LogDelegate logEvent;
         public event UserConnectionDelegate sendSignal;
 
         bool isTryingToConnect = false;
@@ -33,7 +34,24 @@ namespace ATC
 
         public void send(SignalType type, string message)
         {
-            sendSignal(new Signal((Transmitter)this, type, message));
+            if (screen != null && !screen.IsDisposed && currentATC != null)
+            {
+                sendSignal(new Signal((Transmitter)this, type, message));
+            } else
+            {
+                disconnect();
+            }
+        }
+
+        public void log(string message)
+        {
+            if (screen != null && !screen.IsDisposed && logEvent != null)
+            {
+                logEvent(message);
+            } else
+            {
+                disconnect();
+            }
         }
 
         public void handle(Signal signal)
@@ -113,7 +131,9 @@ namespace ATC
 
         public void disconnect()
         {
-            send(SignalType.cancel, null);
+            sendSignal -= logOutgoingSignal;
+            logEvent = null;
+            sendSignal(new Signal(this, SignalType.cancel));
             if (currentATC != null)
             {
                 this.currentATC.disconnect(this);

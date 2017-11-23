@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ATCServiceScreen));
             this.firstATCBtn = new System.Windows.Forms.Button();
             this.secondATCBtn = new System.Windows.Forms.Button();
@@ -78,10 +79,23 @@
             // 
             // onlineGridView
             // 
+            this.onlineGridView.AllowUserToAddRows = false;
+            this.onlineGridView.AllowUserToDeleteRows = false;
+            this.onlineGridView.AllowUserToResizeColumns = false;
+            this.onlineGridView.AllowUserToResizeRows = false;
             this.onlineGridView.BackgroundColor = System.Drawing.Color.White;
             this.onlineGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.onlineGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.onlineGridView.Location = new System.Drawing.Point(247, 65);
             this.onlineGridView.Name = "onlineGridView";
+            this.onlineGridView.ReadOnly = true;
             this.onlineGridView.Size = new System.Drawing.Size(166, 246);
             this.onlineGridView.TabIndex = 4;
             // 
@@ -112,8 +126,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.onlineGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
-            this.onlineGridView.SelectionChanged += dataGridView_SelectionChanged;
 
         }
 

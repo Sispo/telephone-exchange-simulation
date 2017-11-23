@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ATC
 {
-    enum ConnectionStatus { Started, DestinationSelected, Connected }
-    class Connection
+    public enum ConnectionStatus { Started, DestinationSelected, Connected, TryingToAddAnotherUser }
+    public class Connection
     {
         public string id;
         public ConnectionStatus status;

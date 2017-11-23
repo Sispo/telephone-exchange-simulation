@@ -37,7 +37,7 @@
             // enableBtn
             // 
             this.enableBtn.BackColor = System.Drawing.Color.DarkCyan;
-            this.enableBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enableBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.enableBtn.ForeColor = System.Drawing.Color.White;
             this.enableBtn.Location = new System.Drawing.Point(24, 114);
             this.enableBtn.Name = "enableBtn";
@@ -55,8 +55,6 @@
             this.idTextBox.Size = new System.Drawing.Size(184, 29);
             this.idTextBox.TabIndex = 4;
             this.idTextBox.Text = "Automatic ID";
-            this.idTextBox.Enter += idTextBox_Enter;
-            this.idTextBox.Leave += idTextBox_Leave;
             // 
             // nameTextBox
             // 
@@ -66,8 +64,6 @@
             this.nameTextBox.Size = new System.Drawing.Size(184, 29);
             this.nameTextBox.TabIndex = 3;
             this.nameTextBox.Text = "Enter ATC Name";
-            this.nameTextBox.Enter += nameTextBox_Enter;
-            this.nameTextBox.Leave += nameTextBox_Leave;
             // 
             // ATCLoginScreen
             // 

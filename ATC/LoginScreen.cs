@@ -61,9 +61,10 @@ namespace ATC
             {
                 UserScreen screen = new UserScreen();
                 screen.user = result.user;
-                screen.user.log += new LogDelegate(screen.log);
+                screen.user.logEvent += new LogDelegate(screen.log);
+                screen.user.screen = screen;
                 screen.Show();
-                screen.Text = $"User screen {result.user.id}";
+                screen.Text = $"[{atc.name}] User screen {result.user.id}";
                 this.Close();
             } else
             {

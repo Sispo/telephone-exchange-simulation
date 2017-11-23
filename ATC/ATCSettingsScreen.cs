@@ -19,7 +19,8 @@ namespace ATC
             ConfigureUI();
             this.atc = atc;
             atc.logEvent += AddLog;
-            ATCService.shared.stateUpdated += updateOnlineATCList;
+            ATCService.shared.stateUpdated += UpdateOnlineATCList;
+            atc.connectionsChanged += UpdateConnectionsList;
         }
 
         void ConfigureUI()
@@ -49,27 +50,68 @@ namespace ATC
             logsGridView.Columns[0].Width = 655;
         }
 
-        void AddLog(string message)
+        public void disconnect()
         {
-            logsGridView.Rows.Add(message);
-            logsGridView.Rows[logsGridView.Rows.Count - 1].Height = message.Length > 100 ? 70 : 35;
-            logsGridView.FirstDisplayedScrollingRowIndex = logsGridView.RowCount - 1;
+            ATCService.shared.stateUpdated -= UpdateOnlineATCList;
+            atc.logEvent -= AddLog;
+            atc.connectionsChanged -= UpdateConnectionsList;
+        }
+        private void AddLog(string message)
+        {
+            if (!this.IsDisposed)
+            {
+                logsGridView.Rows.Add(message);
+                logsGridView.Rows[logsGridView.Rows.Count - 1].Height = message.Length > 100 ? 70 : 35;
+                logsGridView.FirstDisplayedScrollingRowIndex = logsGridView.RowCount - 1;
+                UpdateOnlineUsersList();
+            }
         }
 
-        private void updateOnlineATCList()
+        private void UpdateOnlineATCList()
         {
-            atcGridView.Rows.Clear();
-
-            foreach (ATC onlineAtc in ATCService.shared.onlineATCs)
+            if (!this.IsDisposed)
             {
-                if (onlineAtc.id != this.atc.id)
+                atcGridView.Rows.Clear();
+
+                foreach (ATC onlineAtc in ATCService.shared.onlineATCs)
                 {
-                    atcGridView.Rows.Add(onlineAtc.nameExtended);
-                    if (this.atc.connectedATCs.Exists(a => a.id == onlineAtc.id))
+                    if (onlineAtc.id != this.atc.id)
                     {
-                        atcGridView.Rows[atcGridView.Rows.Count - 2].Cells[0].Style.BackColor = Color.Green;
-                        atcGridView.Rows[atcGridView.Rows.Count - 2].Cells[0].Style.ForeColor = Color.White;
+                        atcGridView.Rows.Add(onlineAtc.nameExtended);
+                        if (this.atc.connectedATCs.Exists(a => a.id == onlineAtc.id))
+                        {
+                            atcGridView.Rows[atcGridView.Rows.Count - 2].Cells[0].Style.BackColor = Color.Green;
+                            atcGridView.Rows[atcGridView.Rows.Count - 2].Cells[0].Style.ForeColor = Color.White;
+                        }
                     }
+                }
+            }
+                
+        }
+
+        private void UpdateOnlineUsersList()
+        {
+            if (!this.IsDisposed)
+            {
+                usersGridView.Rows.Clear();
+
+                foreach (User user in atc.connectedUsers)
+                {
+                    usersGridView.Rows.Add(user.id);
+                }
+            }
+                
+        }
+
+        private void UpdateConnectionsList()
+        {
+            if (!this.IsDisposed)
+            {
+                connectionsGridView.Rows.Clear();
+
+                foreach (Connection connection in atc.connections)
+                {
+                    connectionsGridView.Rows.Add($"{connection.id} [{connection.users.Count + connection.connectedATCs.Count}]");
                 }
             }
         }
@@ -77,13 +119,6 @@ namespace ATC
         private void dataGridView_SelectionChanged(Object sender, EventArgs e)
         {
             (sender as DataGridView).ClearSelection();
-        }
-
-        private void SettingsScreen_FormClosing(Object sender, FormClosingEventArgs e)
-        {
-            ATCService.shared.stateUpdated -= updateOnlineATCList;
-            atc.logEvent -= AddLog;
-            atc = null;
         }
     }
 }

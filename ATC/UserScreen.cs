@@ -23,13 +23,18 @@ namespace ATC
             logGridView.Columns[0].Width = 355;
             logGridView.ScrollBars = ScrollBars.Vertical;
             logGridView.ClearSelection();
+            this.FormClosing += UserScreen_FormClosing;
         }
 
         public void log(string message)
         {
-            logGridView.Rows.Add(message);
-            logGridView.ClearSelection();
-            logGridView.FirstDisplayedScrollingRowIndex = logGridView.RowCount - 1;
+            if (!this.IsDisposed)
+            {
+                logGridView.Rows.Add(message);
+                logGridView.ClearSelection();
+                logGridView.FirstDisplayedScrollingRowIndex = logGridView.RowCount - 1;
+            }
+            
         }
 
         private void numberBtn_Click(object sender, EventArgs e)
@@ -62,6 +67,7 @@ namespace ATC
 
         private void UserScreen_FormClosing(Object sender, FormClosingEventArgs e)
         {
+            user.logEvent -= log;
             user.disconnect();
         }
     }

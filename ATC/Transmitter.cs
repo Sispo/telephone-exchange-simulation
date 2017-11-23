@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATC
 {
-    public class Transmitter
+    public class Transmitter: IEquatable<Transmitter>
     {
         private string _id;
         public string id
@@ -20,6 +20,16 @@ namespace ATC
         public Transmitter(string id)
         {
             _id = id;
+        }
+
+        public bool Equals(Transmitter other)
+        {
+            return this.id == other.id;
+        }
+
+        public override int GetHashCode()
+        {
+            return id.GetHashCode();
         }
     }
 }
