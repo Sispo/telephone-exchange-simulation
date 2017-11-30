@@ -78,12 +78,15 @@ namespace ATC
                         log($"{signal.sender.id}: {signal.message}");
                         break;
                     case SignalType.busy:
+                        isTryingToConnect = false;
                         log($"{signal.sender.id}: User is busy. Try again later.");
                         break;
                     case SignalType.offline:
+                        isTryingToConnect = false;
                         log($"{signal.sender.id}: User is offline. Try again later.");
                         break;
                     case SignalType.cancel:
+                        isTryingToConnect = false;
                         log($"{signal.sender.id}: {signal.message} disconnected.");
                         break;
                 }
@@ -94,7 +97,7 @@ namespace ATC
 
                 if (signal.type == SignalType.message)
                 {
-                    log($"{sender.id}: {signal.message}");
+                    log($"{sender.GlobalID}: {signal.message}");
                 }
             }
         }
@@ -133,7 +136,10 @@ namespace ATC
         {
             sendSignal -= logOutgoingSignal;
             logEvent = null;
-            sendSignal(new Signal(this, SignalType.cancel));
+            if (sendSignal != null)
+            {
+                sendSignal(new Signal(this, SignalType.cancel));
+            }
             if (currentATC != null)
             {
                 this.currentATC.disconnect(this);

@@ -20,7 +20,7 @@ namespace ATC
         public WelcomeScreen(ATC atc)
         {
             InitializeComponent();
-            nameLbl.Text = ATCNameService.GetName(atc.id).ToUpper();
+            nameLbl.Text = atc.name.ToUpper();
             this.Text = atc.name;
             this.atc = atc;
             settingsScreen = new ATCSettingsScreen(atc);
@@ -39,7 +39,7 @@ namespace ATC
 
         private void connectBtn_Click(object sender, EventArgs e)
         {
-            Login loginScreen = new Login(atc);
+            LoginScreen loginScreen = new LoginScreen(atc);
             loginScreen.Show();
         }
 

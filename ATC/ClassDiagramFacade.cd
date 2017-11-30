@@ -1,28 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="ATC.ATC" Collapsed="true">
-    <Position X="1" Y="3.25" Width="1.5" />
+    <Position X="1.25" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QFBBAgAAAAIAQAUAjAAACCABAAIEAAgAoAACoBwEABA=</HashCode>
+      <HashCode>QBBAAgAAAAIAQAQAjAAACCABAAAEAAgAoAACgBwEABA=</HashCode>
       <FileName>ATC.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="User" />
-      <Property Name="IdUtility" />
-      <Property Name="Connection" />
-      <Property Name="Signal" />
-      <Property Name="ATCNameService" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="ATC.ATCLoginScreen" Collapsed="true">
-    <Position X="8.25" Y="1.5" Width="1.5" />
+    <Position X="5" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAACAAAAAIgACAAICCAAACQCAAAAAAACAAAAA=</HashCode>
+      <HashCode>AIAAAAAAACAAAAAAgACAAICCAAACQCAAAAAAACAAAAA=</HashCode>
       <FileName>ATCLoginScreen.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="ATCLoginResult" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="ATC.ATCNameService" Collapsed="true">
     <Position X="3.5" Y="3.75" Width="1.5" />
@@ -32,33 +22,25 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ATC.ATCLoginResult" Collapsed="true">
-    <Position X="6.5" Y="1.5" Width="1.5" />
+    <Position X="5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAACAAgAAAAAAAAAA=</HashCode>
       <FileName>ATCService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ATC.ATCService" Collapsed="true">
-    <Position X="6.75" Y="2.5" Width="1.5" />
+    <Position X="2.75" Y="8.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAAAAAIgAAADAAAAAAAAAAAACACAAAEEAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAgAAADAAAAAAAAAAAACACAAAEEAA=</HashCode>
       <FileName>ATCService.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="ATC" />
-      <Property Name="ATCLoginResult" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="ATC.ATCServiceScreen" Collapsed="true">
     <Position X="6.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAIAiAAAABCAUCAAAACAAAAIAIAAABGAAAAgAA=</HashCode>
+      <HashCode>AAAAAAAAAiAAAABCAUCAAAACAAAAIAIAAABGAAAAgAA=</HashCode>
       <FileName>ATCServiceScreen.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="ATC" />
-      <Property Name="ATCService" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="ATC.ATCSettingsScreen" Collapsed="true">
     <Position X="4.75" Y="1.5" Width="1.5" />
@@ -66,9 +48,6 @@
       <HashCode>gABBAAAAAiAAABAAAADAAkACCAAAAAAAgAAEAAAUSAE=</HashCode>
       <FileName>ATCSettingsScreen.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="ATC" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="ATC.Connection" Collapsed="true">
     <Position X="1" Y="4.5" Width="1.5" />
@@ -101,35 +80,16 @@
   <Class Name="ATC.LoginScreen" Collapsed="true">
     <Position X="2.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAAAEACAAACIAACCAAAACKAQAACAAgAAAAQAAAAA=</HashCode>
+      <HashCode>AAAAAAAEACAAACIAACCAAAACKAQAAAAAgAAAAQAAAAA=</HashCode>
       <FileName>LoginScreen.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="LoginService" />
-      <Property Name="LoginResult" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="ATC.LoginResult" Collapsed="true">
     <Position X="3" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAAAAAAAAAEAAAAAAAAAACAAAAAAAAAAAQA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAACAAAAAAAAAAAQA=</HashCode>
       <FileName>LoginService.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="User" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="ATC.LoginService" Collapsed="true">
-    <Position X="4.5" Y="5.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAAAAIAAAAAAAAgAAAAAAAAAAAAACAAAAAAAAAEAA=</HashCode>
-      <FileName>LoginService.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="LoginResult" />
-      <Property Name="DatabaseService" />
-      <Property Name="HashService" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="ATC.Program" Collapsed="true">
     <Position X="8.5" Y="4.25" Width="1.5" />
@@ -163,24 +123,16 @@
   <Class Name="ATC.UserScreen" Collapsed="true">
     <Position X="3" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIABAAAgACAEQABAAACQCAACAMw/AAAEAAAAAAAAASI=</HashCode>
+      <HashCode>AIAAAAAgACAEQABAAACQCAACAMw/AAAEAAAAAAAAASI=</HashCode>
       <FileName>UserScreen.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="User" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="ATC.WelcomeScreen" Collapsed="true">
     <Position X="6.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAwBAAACAAAAAAAACAAAAGCAAAAAAAoAABEAAAIAA=</HashCode>
+      <HashCode>AAAAgAAAACAAAAAAAACAAAAGCAAAAAAAoAABEAAAIAA=</HashCode>
       <FileName>WelcomeScreen.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="ATCSettingsScreen" />
-      <Property Name="ATC" />
-      <Property Name="LoginScreen" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="ATC.Properties.Resources" Collapsed="true">
     <Position X="8.5" Y="2.5" Width="1.5" />
@@ -192,6 +144,13 @@
     <Position X="8.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ATC.LoginService" Collapsed="true">
+    <Position X="4.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAEAA=</HashCode>
+      <FileName>LoginService.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="ATC.ConnectionStatus" Collapsed="true">

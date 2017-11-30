@@ -9,34 +9,23 @@ namespace ATC
 {
     class HashService
     {
-
-        static MD5 md5Hash = MD5.Create();
-        public static string GetMd5Hash(string input)
+        public static string GetSHA256Hash(string input)
         {
-
-            // Convert the input string to a byte array and compute the hash.
-            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-
-            // Create a new Stringbuilder to collect the bytes
-            // and create a string.
-            StringBuilder sBuilder = new StringBuilder();
-
-            // Loop through each byte of the hashed data 
-            // and format each one as a hexadecimal string.
-            for (int i = 0; i < data.Length; i++)
+            System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
+            System.Text.StringBuilder hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(input), 0, Encoding.UTF8.GetByteCount(input));
+            foreach (byte theByte in crypto)
             {
-                sBuilder.Append(data[i].ToString("x2"));
+                hash.Append(theByte.ToString("x2"));
             }
-
-            // Return the hexadecimal string.
-            return sBuilder.ToString();
+            return hash.ToString();
         }
 
         // Verify a hash against a string.
-        public static bool VerifyMd5Hash(string input, string hash)
+        public static bool VerifySHA256Hash(string input, string hash)
         {
             // Hash the input.
-            string hashOfInput = GetMd5Hash(input);
+            string hashOfInput = GetSHA256Hash(input);
 
             // Create a StringComparer an compare the hashes.
             StringComparer comparer = StringComparer.OrdinalIgnoreCase;

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="ATC.ATC" Collapsed="true">
-    <Position X="1" Y="3.25" Width="1.5" />
+  <Class Name="ATC.ATC">
+    <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QFBBAgAAAAIAQAUAjAAACCABAAIEAAgAoAACoBwEABA=</HashCode>
       <FileName>ATC.cs</FileName>
@@ -14,8 +14,8 @@
       <Property Name="ATCNameService" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ATC.ATCLoginScreen" Collapsed="true">
-    <Position X="8.25" Y="1.5" Width="1.5" />
+  <Class Name="ATC.ATCLoginScreen">
+    <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAACAAAAAIgACAAICCAAACQCAAAAAAACAAAAA=</HashCode>
       <FileName>ATCLoginScreen.cs</FileName>
@@ -24,22 +24,22 @@
       <Property Name="ATCLoginResult" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ATC.ATCNameService" Collapsed="true">
-    <Position X="3.5" Y="3.75" Width="1.5" />
+  <Class Name="ATC.ATCNameService">
+    <Position X="4.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
       <FileName>ATCNameService.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ATC.ATCLoginResult" Collapsed="true">
-    <Position X="6.5" Y="1.5" Width="1.5" />
+  <Class Name="ATC.ATCLoginResult">
+    <Position X="5.75" Y="14.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAACAAgAAAAAAAAAA=</HashCode>
       <FileName>ATCService.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ATC.ATCService" Collapsed="true">
-    <Position X="6.75" Y="2.5" Width="1.5" />
+  <Class Name="ATC.ATCService">
+    <Position X="6" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAAAAAIgAAADAAAAAAAAAAAACACAAAEEAA=</HashCode>
       <FileName>ATCService.cs</FileName>
@@ -49,8 +49,8 @@
       <Property Name="ATCLoginResult" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ATC.ATCServiceScreen" Collapsed="true">
-    <Position X="6.75" Y="3.25" Width="1.5" />
+  <Class Name="ATC.ATCServiceScreen">
+    <Position X="0.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAAAAAIAiAAAABCAUCAAAACAAAAIAIAAABGAAAAgAA=</HashCode>
       <FileName>ATCServiceScreen.cs</FileName>
@@ -60,8 +60,8 @@
       <Property Name="ATCService" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ATC.ATCSettingsScreen" Collapsed="true">
-    <Position X="4.75" Y="1.5" Width="1.5" />
+  <Class Name="ATC.ATCSettingsScreen">
+    <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gABBAAAAAiAAABAAAADAAkACCAAAAAAAgAAEAAAUSAE=</HashCode>
       <FileName>ATCSettingsScreen.cs</FileName>
@@ -70,36 +70,36 @@
       <Property Name="ATC" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ATC.Connection" Collapsed="true">
-    <Position X="1" Y="4.5" Width="1.5" />
+  <Class Name="ATC.Connection">
+    <Position X="7.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhg=</HashCode>
       <FileName>Connection.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ATC.DatabaseService" Collapsed="true">
-    <Position X="3.75" Y="5" Width="1.5" />
+  <Class Name="ATC.DatabaseService">
+    <Position X="2.25" Y="14.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DatabaseService.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ATC.HashService" Collapsed="true">
-    <Position X="6.75" Y="5.25" Width="1.5" />
+  <Class Name="ATC.HashService">
+    <Position X="4" Y="14.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEABAAAAAA=</HashCode>
       <FileName>HashService.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ATC.IdUtility" Collapsed="true">
-    <Position X="1" Y="5.25" Width="1.5" />
+  <Class Name="ATC.IdUtility">
+    <Position X="0.5" Y="12.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IdUtility.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ATC.LoginScreen" Collapsed="true">
-    <Position X="2.75" Y="5.75" Width="1.5" />
+  <Class Name="ATC.LoginScreen">
+    <Position X="2.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAEACAAACIAACCAAAACKAQAACAAgAAAAQAAAAA=</HashCode>
       <FileName>LoginScreen.cs</FileName>
@@ -109,8 +109,8 @@
       <Property Name="LoginResult" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ATC.LoginResult" Collapsed="true">
-    <Position X="3" Y="2.5" Width="1.5" />
+  <Class Name="ATC.LoginResult">
+    <Position X="0.5" Y="14.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAAAAAAAAEAAAAAAAAAACAAAAAAAAAAAQA=</HashCode>
       <FileName>LoginService.cs</FileName>
@@ -119,8 +119,8 @@
       <Property Name="User" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ATC.LoginService" Collapsed="true">
-    <Position X="4.5" Y="5.75" Width="1.5" />
+  <Class Name="ATC.LoginService">
+    <Position X="2.25" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAIAAAAAAAAgAAAAAAAAAAAAACAAAAAAAAAEAA=</HashCode>
       <FileName>LoginService.cs</FileName>
@@ -132,36 +132,36 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="ATC.Program" Collapsed="true">
-    <Position X="8.5" Y="4.25" Width="1.5" />
+    <Position X="7.5" Y="14.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ATC.Signal" Collapsed="true">
-    <Position X="1" Y="6" Width="1.5" />
+  <Class Name="ATC.Signal">
+    <Position X="7.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAAAEAAAAAAAQAAAAAAAAAAAABAAAAEAAAAAAAACA=</HashCode>
       <FileName>Signal.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ATC.Transmitter" Collapsed="true">
-    <Position X="1" Y="2.5" Width="1.5" />
+  <Class Name="ATC.Transmitter">
+    <Position X="0.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAgABAAAAAAAAAAIAAAAAAAAAAAgA=</HashCode>
       <FileName>Transmitter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ATC.User" Collapsed="true">
-    <Position X="1" Y="1.5" Width="1.5" />
+  <Class Name="ATC.User">
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABIAAAAAAAAQAAAAAAACiQEAAAAAgAAAAACAgAEAAA=</HashCode>
       <FileName>User.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ATC.UserScreen" Collapsed="true">
-    <Position X="3" Y="1.5" Width="1.5" />
+  <Class Name="ATC.UserScreen">
+    <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIABAAAgACAEQABAAACQCAACAMw/AAAEAAAAAAAAASI=</HashCode>
       <FileName>UserScreen.cs</FileName>
@@ -170,8 +170,8 @@
       <Property Name="User" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ATC.WelcomeScreen" Collapsed="true">
-    <Position X="6.75" Y="4.25" Width="1.5" />
+  <Class Name="ATC.WelcomeScreen">
+    <Position X="4" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAAwBAAACAAAAAAAACAAAAGCAAAAAAAoAABEAAAIAA=</HashCode>
       <FileName>WelcomeScreen.cs</FileName>
@@ -183,47 +183,47 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="ATC.Properties.Resources" Collapsed="true">
-    <Position X="8.5" Y="2.5" Width="1.5" />
+    <Position X="7.5" Y="15" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="ATC.Properties.Settings" Collapsed="true">
-    <Position X="8.5" Y="3.25" Width="1.5" />
+    <Position X="7.5" Y="15.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Enum Name="ATC.ConnectionStatus" Collapsed="true">
-    <Position X="4.5" Y="6.75" Width="1.5" />
+  <Enum Name="ATC.ConnectionStatus">
+    <Position X="6" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAAQAAQAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Connection.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="ATC.SignalType" Collapsed="true">
-    <Position X="2.75" Y="6.75" Width="1.5" />
+  <Enum Name="ATC.SignalType">
+    <Position X="6" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABEAAAAAEBAQAAAAAAAAAAIAAAAAAAgAAAAAAAAACA=</HashCode>
       <FileName>Signal.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Delegate Name="ATC.UserConnectionDelegate" Collapsed="true">
-    <Position X="6.25" Y="6.75" Width="1.5" />
+  <Delegate Name="ATC.UserConnectionDelegate">
+    <Position X="6" Y="12" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>ATC.cs</FileName>
     </TypeIdentifier>
   </Delegate>
   <Delegate Name="ATC.ActionDelegate" Collapsed="true">
-    <Position X="8" Y="6.75" Width="1.5" />
+    <Position X="4" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ATCService.cs</FileName>
     </TypeIdentifier>
   </Delegate>
-  <Delegate Name="ATC.LogDelegate" Collapsed="true">
-    <Position X="1" Y="6.75" Width="1.5" />
+  <Delegate Name="ATC.LogDelegate">
+    <Position X="4" Y="12.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>User.cs</FileName>

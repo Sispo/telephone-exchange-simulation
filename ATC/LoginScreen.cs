@@ -10,14 +10,15 @@ using System.Windows.Forms;
 
 namespace ATC
 {
-    public partial class Login : Form
+    public partial class LoginScreen : Form
     {
         public ATC atc;
-        public Login(ATC atc)
+        public LoginScreen(ATC atc)
         {
             InitializeComponent();
             this.atc = atc;
         }
+
         private void numberTextBox_Enter(object sender, EventArgs e)
         {
             if (numberTextBox.Text == "Enter a number")

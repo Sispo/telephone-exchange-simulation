@@ -21,6 +21,9 @@ namespace ATC
             atc.logEvent += AddLog;
             ATCService.shared.stateUpdated += UpdateOnlineATCList;
             atc.connectionsChanged += UpdateConnectionsList;
+            this.UpdateConnectionsList();
+            this.UpdateOnlineATCList();
+            this.UpdateOnlineUsersList();
         }
 
         void ConfigureUI()

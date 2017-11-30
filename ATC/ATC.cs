@@ -68,7 +68,7 @@ namespace ATC
             {
                 if (connections[i].connectedATCs.ContainsKey(atc))
                 {
-                    handleCancel(new Signal((Transmitter)atc, SignalType.cancel, atc.id), connections[i]);
+                    handleCancel(new Signal((Transmitter)atc, SignalType.cancel, atc.id), connections[i],this.id);
                 }
             }
             connectedATCs.Remove(atc);
@@ -118,11 +118,54 @@ namespace ATC
                 }
             } else
             {
-                string connectionID = atc.handleIncomingConnection(this, getUserId(connection.destinationNumber), connection.id, user.GlobalID);
-                connection.ConnectATC(atc, connectionID);
-                log($"Connected User {user.id} to ATC {ATCNameService.GetName(atcID)} ({atcID}). Connection ID: {connection.id}");
+                string existingConnectionID = ATC.FindExistingConnectionID(this.id, connection, atc, this.id);
+                if(existingConnectionID != null)
+                {
+                    atc.handleIncomingConnection(existingConnectionID, this, getUserId(connection.destinationNumber), connection.id, user.GlobalID);
+                    log($"Connected User {user.id} to ATC {ATCNameService.GetName(atcID)} ({atcID}). Connection ID: {connection.id}");
+
+                } else
+                {
+                    string connectionID = atc.handleIncomingConnection(this, getUserId(connection.destinationNumber), connection.id, user.GlobalID);
+                    connection.ConnectATC(atc, connectionID);
+                    log($"Connected User {user.id} to ATC {ATCNameService.GetName(atcID)} ({atcID}). Connection ID: {connection.id}");
+                }
             }
 
+        }
+
+        static string FindExistingConnectionID(string connectionATCid, Connection connection, ATC desiredATC, string sourceATC)
+        {
+            foreach(ATC atc in connection.connectedATCs.Keys)
+            {
+                if (atc.id != sourceATC)
+                {
+                    if (atc.id == desiredATC.id)
+                    {
+                        return connection.connectedATCs[atc];
+                    }
+                    else
+                    {
+                        Connection lowerConnection = atc.connections.Find(c => c.id == connection.connectedATCs[atc]);
+                        if (lowerConnection != null)
+                        {
+                            return ATC.FindExistingConnectionID(atc.id, lowerConnection, desiredATC, connectionATCid);
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public void handleIncomingConnection(string existingConnectionID, ATC atc, string destinationNumber, string connectionID, string callerID)
+        {
+            Connection connection = connections.Find(c => c.id == existingConnectionID);
+          
+            connection.destinationNumber = destinationNumber;
+            connectionsChanged();
+            connectUserWithIncommingCaller(connection, atc, callerID, true);
+            log($"Handled incoming connection from ATC {atc.name}. Destination number: {destinationNumber}. Caller ID: {callerID}. This connection between these ATCs has existed before.");
         }
 
         public string handleIncomingConnection(ATC atc, string destinationNumber, string connectionID, string callerID)
@@ -132,7 +175,7 @@ namespace ATC
             connection.destinationNumber = destinationNumber;
             connections.Add(connection);
             connectionsChanged();
-            connectUserWithIncommingCaller(connection, atc, callerID);
+            connectUserWithIncommingCaller(connection, atc, callerID, false);
             log($"Handled incoming connection from ATC {atc.name}. Destination number: {destinationNumber}. Caller ID: {callerID}.");
             return connection.id;
         }
@@ -157,38 +200,64 @@ namespace ATC
             return GlobalID[2].ToString() + GlobalID[3].ToString() + GlobalID[4].ToString();
         }
 
-        public void handleSignalFromATC(Signal signal, string connectionID)
+        public void handleSignalFromATC(Signal signal, string atcID, string connectionID)
         {
             Connection connection = connections.Find(c => c.id == connectionID);
-            switch (signal.type)
+
+            if (connection != null)
             {
-                case SignalType.busy: case SignalType.offline:
-                    handleIncomingBusyOffline(signal, connection);
-                    break;
-                case SignalType.message:
-                    handleMessage(signal, connection);
-                    break;
-                case SignalType.cancel:
-                    handleCancel(signal, connection);
-                    break;
+                switch (signal.type)
+                {
+                    case SignalType.busy:
+                    case SignalType.offline:
+                        handleIncomingBusyOffline(signal, connection, atcID);
+                        break;
+                    case SignalType.message:
+                        handleMessage(signal, connection, atcID);
+                        break;
+                    case SignalType.cancel:
+                        handleCancel(signal, connection, atcID);
+                        break;
+                }
             }
         }
 
-        void handleIncomingBusyOffline(Signal signal, Connection connection)
+        void handleIncomingTone(Signal signal, string atcID, string connectionID)
         {
-            string atcID = getATCid(signal.sender.id);
+            Connection connection = connections.Find(c => c.id == connectionID);
 
-            bool isSignalLocal = atcID == this.id;
+            string sourceAtcID = getATCid(signal.sender.id);
 
-            ATC atcToRemove = connection.connectedATCs.Keys.ToList().Find(a => a.id == atcID);
+            foreach (User user in connection.users)
+            {
+                user.handle(new Signal((Transmitter)this, SignalType.tone, signal.message));
+                log($"Sended User {user.id} a tone signal. Connection ID: {connection.id}.");
+            }
+            foreach (ATC connectedATC in connection.connectedATCs.Keys)
+            {
+                if (connectedATC.id != sourceAtcID && connectedATC.id != atcID)
+                {
+                    connectedATC.handleSignalFromATC(signal, this.id, connection.connectedATCs[connectedATC]);
+                    log($"Sended ATC {connectedATC.name} a tone signal. Connection ID: {connection.id}.");
+                }
+            }
+
+            connectionsChanged();
+        }
+
+        void handleIncomingBusyOffline(Signal signal, Connection connection, string atcID)
+        {
+            string sourceAtcID = getATCid(signal.sender.id);
+
+            ATC atcToRemove = connection.connectedATCs.Keys.ToList().Find(a => a.id == sourceAtcID);
             if (atcToRemove != null)
             {
                 connection.connectedATCs.Remove(atcToRemove);
                 log($"Removed ATC {atcToRemove.name} from connection {connection.id}.");
             }
 
-            Signal busyOfflineSignal = new Signal((Transmitter)this, signal.type, $"{ATCNameService.GetName(atcID)} ({atcID})");
-            Signal cancelSignal = new Signal((Transmitter)this, SignalType.cancel, $"{ATCNameService.GetName(atcID)} ({atcID})");
+            Signal busyOfflineSignal = new Signal((Transmitter)this, signal.type, $"{ATCNameService.GetName(sourceAtcID)} ({sourceAtcID})");
+            Signal cancelSignal = new Signal((Transmitter)this, SignalType.cancel, $"{ATCNameService.GetName(sourceAtcID)} ({sourceAtcID})");
 
             foreach (User user in connection.users)
             {
@@ -198,7 +267,7 @@ namespace ATC
             }
             foreach (ATC connectedATC in connection.connectedATCs.Keys)
             {
-                connectedATC.handleSignalFromATC(signal, connection.connectedATCs[connectedATC]);
+                connectedATC.handleSignalFromATC(signal, this.id, connection.connectedATCs[connectedATC]);
                 log($"Sended ATC {connectedATC.name} a cancel signal. Connection ID: {connection.id}.");
             }
 
@@ -215,7 +284,7 @@ namespace ATC
                 else
                 {
                     ATC lastATC = connection.connectedATCs.Keys.First();
-                    lastATC.handleSignalFromATC(connectionClosedSignal, connection.connectedATCs[lastATC]);
+                    lastATC.handleSignalFromATC(connectionClosedSignal, this.id, connection.connectedATCs[lastATC]);
                     log($"Sended ATC {lastATC.name} a tone signal. Connection ID: {connection.id}. Connection Closed.");
                 }
 
@@ -242,9 +311,21 @@ namespace ATC
 
                             if (existingConnection != null)
                             {
+                                foreach (User user in existingConnection.users)
+                                {
+                                    user.handle(new Signal((Transmitter)this, SignalType.tone, $"You are now connected with user {sender.GlobalID}"));
+                                }
+                                foreach (ATC atc in existingConnection.connectedATCs.Keys)
+                                {
+                                    atc.handleIncomingTone(new Signal((Transmitter)this, SignalType.phone, $"You are now connected with user {sender.GlobalID}"), this.id, existingConnection.connectedATCs[atc]);
+                                }
                                 existingConnection.users.Add(sender);
                                 existingConnection.status = ConnectionStatus.Connected;
                                 log($"User {sender.id} is now connected. Connection ID: {existingConnection.id}");
+                                waitingForTheResponceFrom.RemoveAll(x => x.id == sender.id);
+                            } else
+                            {
+                                waitingForTheResponceFrom.RemoveAll(x => x.id == sender.id);
                             }
 
                         }
@@ -256,6 +337,33 @@ namespace ATC
                             sender.handle(new Signal((Transmitter)this, SignalType.tone, "Please enter destination number..."));
                             log($"User {sender.id} is trying to connect. Waiting for the destination number.");
                         }
+                    } else if (signal.type == SignalType.cancel)
+                    {
+                        if (waitingForTheResponceFrom.Exists(x => x.id == sender.id))
+                        {
+                            Connection existingConnection = connections.Find(x => x.destinationNumber == sender.id);
+
+                            if (existingConnection != null)
+                            {
+                                foreach (User user in existingConnection.users)
+                                {
+                                    user.handle(new Signal((Transmitter)this, SignalType.tone, $"{sender.GlobalID} have canceled call."));
+                                }
+                                foreach (ATC atc in existingConnection.connectedATCs.Keys)
+                                {
+                                    atc.handleSignalFromATC(new Signal((Transmitter)this, SignalType.cancel, $"{sender.GlobalID} have canceled call."), this.id, existingConnection.connectedATCs[atc]);
+                                }
+                                log($"User {sender.id} canceled call. Abandoning connection. {existingConnection.id}");
+                                waitingForTheResponceFrom.RemoveAll(x => x.id == sender.id);
+                                connections.Remove(existingConnection);
+                                connectionsChanged();
+                            }
+                            else
+                            {
+                                waitingForTheResponceFrom.RemoveAll(x => x.id == sender.id);
+                            }
+
+                        }
                     }
                 }
                 else
@@ -266,10 +374,10 @@ namespace ATC
                             handleNumber(signal, connection);
                             break;
                         case SignalType.message:
-                            handleMessage(signal, connection);
+                            handleMessage(signal, connection, this.id);
                             break;
                         case SignalType.cancel:
-                            handleCancel(signal, connection);
+                            handleCancel(signal, connection, this.id);
                             break;
                         case SignalType.phone:
                             handlePhoneSignalWithExistingConnection(sender, signal, connection);
@@ -288,7 +396,7 @@ namespace ATC
             log($"User {sender.id} that already has a connection is trying to connect. Waiting for the destination number.");
         }
 
-        void connectUserWithIncommingCaller(Connection connection, ATC atc, string callerID)
+        void connectUserWithIncommingCaller(Connection connection, ATC atc, string callerID, bool existingConnection)
         {
             connection.status = ConnectionStatus.DestinationSelected;
 
@@ -296,24 +404,73 @@ namespace ATC
 
             if (user == null)
             {
+                Signal offlineSignal = new Signal((Transmitter)this, SignalType.offline);
+
                 log($"Sended ATC {atc.name} a signal. Requested User {connection.destinationNumber} is offline.");
-                atc.handleSignalFromATC(new Signal((Transmitter)this, SignalType.offline), connection.connectedATCs[atc]);
-                connections.Remove(connection);
-                connectionsChanged();
+                if (existingConnection)
+                {
+                    foreach(User u in connection.users)
+                    {
+                        u.handle(offlineSignal);
+                        log($"User {u.id} received response. User {connection.destinationNumber} is offline.");
+                    }
+
+                    foreach(ATC a in connection.connectedATCs.Keys)
+                    {
+                        a.handleSignalFromATC(offlineSignal, this.id, connection.connectedATCs[a]);
+                        log($"ATC {a.id} received response. User {connection.destinationNumber} is offline.");
+                    }
+
+
+                } else
+                {
+                    atc.handleSignalFromATC(new Signal((Transmitter)this, SignalType.offline), this.id, connection.connectedATCs[atc]);
+                    log($"ATC {atc.id} received response. User {connection.destinationNumber} is offline.");
+                    connections.Remove(connection);
+                    connectionsChanged();
+                }
             }
             else
             {
                 if (connections.Exists(c => c.users.Exists(x => x.id == connection.destinationNumber)))
                 {
-                    log($"Sended ATC {atc.name} a signal. Requested User {connection.destinationNumber} is busy.");
-                    atc.handleSignalFromATC(new Signal((Transmitter)this, SignalType.busy), connection.connectedATCs[atc]);
-                    connections.Remove(connection);
-                    connectionsChanged();
+
+                    Signal busySignal = new Signal((Transmitter)this, SignalType.busy);
+
+                    if (existingConnection)
+                    {
+
+                        foreach (User u in connection.users)
+                        {
+                            u.handle(busySignal);
+                            log($"User {u.id} received response. User {connection.destinationNumber} is busy.");
+                        }
+
+                        foreach (ATC a in connection.connectedATCs.Keys)
+                        {
+                            a.handleSignalFromATC(busySignal, this.id, connection.connectedATCs[a]);
+                            log($"ATC {a.id} received response. User {connection.destinationNumber} is busy.");
+                        }
+
+                    } else
+                    {
+                        log($"Sended ATC {atc.name} a signal. Requested User {connection.destinationNumber} is busy.");
+                        atc.handleSignalFromATC(busySignal, this.id, connection.connectedATCs[atc]);
+                        connections.Remove(connection);
+                        connectionsChanged();
+                    }
                 }
                 else
                 {
-                    atc.handleSignalFromATC(new Signal((Transmitter)this, SignalType.call, user.id), connection.connectedATCs[atc]);
-                    user.handle(new Signal((Transmitter)this, SignalType.call, callerID));
+
+                    Signal callSignal = new Signal((Transmitter)this, SignalType.call, user.id);
+
+                    if (!existingConnection)
+                    {
+                        atc.handleSignalFromATC(callSignal, this.id, connection.connectedATCs[atc]);
+                    }
+                    
+                    user.handle(callSignal);
                     waitingForTheResponceFrom.Add(user);
                     log($"Sended ATC {atc.name} a call signal. Waiting for the responce from User {user.id}.");
                 }
@@ -340,41 +497,51 @@ namespace ATC
 
                         await Task.Delay(2000);
 
-                        if (!isGoingToMakeOutgoingCall[sender.id])
+                        if (isGoingToMakeOutgoingCall.ContainsKey(sender.id))
                         {
-                            connection.status = ConnectionStatus.DestinationSelected;
-
-                            User user = connectedUsers.Find(x => x.id == connection.destinationNumber);
-
-                            if (user == null)
+                            if (!isGoingToMakeOutgoingCall[sender.id])
                             {
-                                sender.handle(new Signal((Transmitter)this, SignalType.offline));
-                                log($"User {sender.id} received response. User {connection.destinationNumber} is offline.");
-                            }
-                            else
-                            {
-                                if (connections.Exists(c => c.users.Exists(x => x.id == connection.destinationNumber)))
+                                connection.status = ConnectionStatus.DestinationSelected;
+
+                                User user = connectedUsers.Find(x => x.id == connection.destinationNumber);
+
+                                if (user == null)
                                 {
-                                    sender.handle(new Signal((Transmitter)this, SignalType.busy));
-                                    log($"User {sender.id} received response. User {connection.destinationNumber} is busy.");
+                                    sender.handle(new Signal((Transmitter)this, SignalType.offline));
+                                    connections.Remove(connection);
+                                    connectionsChanged();
+                                    log($"User {sender.id} received response. User {connection.destinationNumber} is offline.");
                                 }
                                 else
                                 {
-                                    sender.handle(new Signal((Transmitter)this, SignalType.call, user.id));
-                                    user.handle(new Signal((Transmitter)this, SignalType.call, sender.id));
-                                    waitingForTheResponceFrom.Add(user);
-                                    log($"Sended user {sender.id} a call signal. Waiting for the responce from User {user.id}.");
+                                    if (connections.Exists(c => c.users.Exists(x => x.id == connection.destinationNumber)))
+                                    {
+                                        sender.handle(new Signal((Transmitter)this, SignalType.busy));
+                                        connections.Remove(connection);
+                                        connectionsChanged();
+                                        log($"User {sender.id} received response. User {connection.destinationNumber} is busy.");
+                                    }
+                                    else
+                                    {
+                                        sender.handle(new Signal((Transmitter)this, SignalType.call, user.id));
+                                        user.handle(new Signal((Transmitter)this, SignalType.call, sender.id));
+                                        waitingForTheResponceFrom.Add(user);
+                                        log($"Sended user {sender.id} a call signal. Waiting for the responce from User {user.id}.");
+                                    }
                                 }
                             }
-                        } 
 
-                        isGoingToMakeOutgoingCall.Remove(sender.id);
+                            isGoingToMakeOutgoingCall.Remove(sender.id);
+                        }
 
                     } else if (connection.destinationNumber.Length == 5)
                     {
                         isGoingToMakeOutgoingCall[sender.id] = true;
 
+                        connection.status = ConnectionStatus.DestinationSelected;
+
                         connectUserToATC(sender, connection);
+
                     }
 
                 } else
@@ -385,21 +552,21 @@ namespace ATC
             }
         }
 
-        void handleMessage(Signal signal, Connection connection)
+        void handleMessage(Signal signal, Connection connection, string atcID)
         {
             if (signal.sender is User)
             {
                 User sender = signal.sender as User;
 
-                string atcID = getATCid(sender.GlobalID);
+                string sourceAtcID = getATCid(sender.GlobalID);
 
-                bool isSignalLocal = atcID == this.id;
+                bool isSignalLocal = sourceAtcID == this.id;
 
                 foreach (ATC connectedATC in connection.connectedATCs.Keys)
                 {
-                    if (isSignalLocal || connectedATC.id != atcID)
+                    if (isSignalLocal || (connectedATC.id != sourceAtcID && connectedATC.id != atcID))
                     {
-                        connectedATC.handleSignalFromATC(signal, connection.connectedATCs[connectedATC]);
+                        connectedATC.handleSignalFromATC(signal, this.id, connection.connectedATCs[connectedATC]);
                         log($"Sended ATC {connectedATC.name} a message signal. Connection ID: {connection.id}.");
                     }
                 }
@@ -415,11 +582,33 @@ namespace ATC
             }
         } 
 
-        void handleCancel(Signal signal, Connection connection)
+        void handleCancel(Signal signal, Connection connection, string atcID)
         {
-            string atcID = getATCid(signal.sender.id);
+            if (connection.status == ConnectionStatus.TryingToAddAnotherUser && signal.sender is User)
+            {
+                connection.status = ConnectionStatus.TryingToAddAnotherUser;
+                connection.destinationNumber = "";
+                (signal.sender as User).handle(new Signal((Transmitter)this, SignalType.tone, $"Destination number cleared."));
 
-            bool isSignalLocal = atcID == this.id;
+                if (isGoingToMakeOutgoingCall.ContainsKey(signal.sender.id))
+                {
+                    isGoingToMakeOutgoingCall.Remove(signal.sender.id);
+                }
+
+                return;
+            }
+
+            string sourceAtcID = "";
+
+            if (signal.sender is User)
+            {
+                sourceAtcID = getATCid((signal.sender as User).GlobalID);
+            } else
+            {
+                sourceAtcID = signal.sender.id;
+            }
+
+            bool isSignalLocal = sourceAtcID == this.id;
 
             if (isSignalLocal)
             {
@@ -427,7 +616,7 @@ namespace ATC
                 log($"Removed User {signal.sender.id} from connection {connection.id}.");
             } else
             {
-                ATC atcToRemove = connection.connectedATCs.Keys.ToList().Find(a => a.id == atcID);
+                ATC atcToRemove = connection.connectedATCs.Keys.ToList().Find(a => a.id == sourceAtcID);
                 if (atcToRemove != null)
                 {
                     connection.connectedATCs.Remove(atcToRemove);
@@ -436,7 +625,7 @@ namespace ATC
                 
             }
 
-            Signal cancelSignal = new Signal((Transmitter)this, SignalType.cancel, isSignalLocal ? signal.sender.id : $"{ATCNameService.GetName(atcID)} ({atcID})");
+            Signal cancelSignal = new Signal((Transmitter)this, SignalType.cancel, isSignalLocal ? signal.sender.id : $"{ATCNameService.GetName(sourceAtcID)} ({sourceAtcID})");
 
             foreach (User user in connection.users)
             {
@@ -445,8 +634,11 @@ namespace ATC
             }
             foreach (ATC connectedATC in connection.connectedATCs.Keys)
             {
-                connectedATC.handleSignalFromATC(signal, connection.connectedATCs[connectedATC]);
-                log($"Sended ATC {connectedATC.name} a cancel signal. Connection ID: {connection.id}.");
+                if (connectedATC.id != atcID)
+                {
+                    connectedATC.handleSignalFromATC(signal, this.id, connection.connectedATCs[connectedATC]);
+                    log($"Sended ATC {connectedATC.name} a cancel signal. Connection ID: {connection.id}.");
+                }
             }
 
             if (connection.users.Count + connection.connectedATCs.Keys.Count == 1)
@@ -461,8 +653,11 @@ namespace ATC
                 } else
                 {
                     ATC lastATC = connection.connectedATCs.Keys.First();
-                    lastATC.handleSignalFromATC(connectionClosedSignal, connection.connectedATCs[lastATC]);
-                    log($"Sended ATC {lastATC.name} a tone signal. Connection ID: {connection.id}. Connection Closed.");
+                    if (lastATC.id != atcID)
+                    {
+                        lastATC.handleSignalFromATC(connectionClosedSignal, this.id, connection.connectedATCs[lastATC]);
+                        log($"Sended ATC {lastATC.name} a tone signal. Connection ID: {connection.id}. Connection Closed.");
+                    }
                 }
 
                 connections.Remove(connection);

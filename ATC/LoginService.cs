@@ -22,7 +22,6 @@ namespace ATC
     }
     class LoginService
     {
-        
         public static LoginResult login(string id, string password, ATC atc)
         {
             try
@@ -49,7 +48,7 @@ namespace ATC
 
                 string passwordHash = db[id];
 
-                if (HashService.VerifyMd5Hash(password,passwordHash))
+                if (HashService.VerifySHA256Hash(password,passwordHash))
                 {
                     User user = connectUser(id, atc);
                     if (user != null)
@@ -75,7 +74,7 @@ namespace ATC
         }
         static LoginResult signUp(ATC atc, string id, string password)
         {
-            if (DatabaseService.Save(atc.id, id, HashService.GetMd5Hash(password)))
+            if (DatabaseService.Save(atc.id, id, HashService.GetSHA256Hash(password)))
             {
                 User user = connectUser(id, atc);
                 if (user != null)
