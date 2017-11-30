@@ -2,4 +2,4 @@
 
 Coursework
 
-![Alt text](/screenshot.png?raw=true "Screenshot")
+![Alt text](/screenshot.jpg?raw=true "Screenshot")
